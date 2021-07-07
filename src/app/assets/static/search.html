@@ -188,9 +188,15 @@
         }
     }
 
+    function clean_markdown(md) {
+        // remove image tag
+        return md.replace(/(?:!\[(.*?)\]\((.*?)\))/g, "");
+    }
+
     function append_preview_element(e, md) {
         var res = $(e).parent().parent().parent();
         if (res.children("div.box").length == 0) {
+            md = clean_markdown(md);
             res.append('<div class="box">' + marked(md) + '</div>');
         }
     }
